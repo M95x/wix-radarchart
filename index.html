@@ -12,3 +12,27 @@
     <p>Om du ser detta meddelande, laddar HTML korrekt men JavaScript fungerar kanske inte.</p>
 </body>
 </html>
+window.addEventListener("message", (event) => {
+    console.log("Meddelande mottaget:", event.data);  // Felsökning: Visa mottagen data
+    if (event.data && event.data.type === "updateChart") {
+        const dataValues = event.data.values;
+
+        const ctx = document.getElementById('myRadarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Hälsa', 'Sinne', 'Relationer', 'Produktivitet', 'Karriär', 'Ekonomi', 'Ledarskap'],
+                datasets: [{
+                    label: 'Dina Resultat',
+                    data: dataValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scale: { ticks: { beginAtZero: true, max: 10 }}
+            }
+        });
+    }
+});
