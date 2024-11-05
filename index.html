@@ -10,7 +10,6 @@
     <div id="chart-container">
         <canvas id="myRadarChart" width="800" height="500"></canvas>
     </div>
-    <p>Om du ser detta meddelande, laddar HTML korrekt men JavaScript fungerar kanske inte.</p>
 
     <script>
         window.addEventListener("message", (event) => {
@@ -19,30 +18,26 @@
                 const dataValues = event.data.values;
                 console.log("DataValues för diagrammet:", dataValues);  // Felsökning: Kontrollera att dataValues är korrekt
 
-                // Kontrollera att dataValues är en Array med korrekt längd
-                if (Array.isArray(dataValues) && dataValues.length === 7) {
-                    const ctx = document.getElementById('myRadarChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'radar',
-                        data: {
-                            labels: ['Hälsa', 'Sinne', 'Relationer', 'Produktivitet', 'Karriär', 'Ekonomi', 'Ledarskap'],
-                            datasets: [{
-                                label: 'Dina Resultat',
-                                data: dataValues,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scale: { ticks: { beginAtZero: true, max: 10 }}
-                        }
-                    });
-                } else {
-                    console.error("DataValues är inte en korrekt array:", dataValues);
-                }
+                const ctx = document.getElementById('myRadarChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Hälsa', 'Sinne', 'Relationer', 'Produktivitet', 'Karriär', 'Ekonomi', 'Ledarskap'],
+                        datasets: [{
+                            label: 'Dina Resultat',
+                            data: dataValues,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scale: { ticks: { beginAtZero: true, max: 10 }}
+                    }
+                });
             }
         });
     </script>
 </body>
 </html>
+
