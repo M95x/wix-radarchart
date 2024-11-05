@@ -12,10 +12,12 @@
     <p>Om du ser detta meddelande, laddar HTML korrekt men JavaScript fungerar kanske inte.</p>
 </body>
 </html>
+
 window.addEventListener("message", (event) => {
     console.log("Meddelande mottaget:", event.data);  // Felsökning: Visa mottagen data
     if (event.data && event.data.type === "updateChart") {
         const dataValues = event.data.values;
+        console.log("DataValues för diagrammet:", dataValues);  // Felsökning: Kontrollera att dataValues är korrekt
 
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         new Chart(ctx, {
@@ -36,3 +38,5 @@ window.addEventListener("message", (event) => {
         });
     }
 });
+
+           
